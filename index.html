@@ -13,6 +13,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="public/style.css">
+    <!-- JS -->
 </head>
 <body>
 <div id="app">
@@ -21,12 +22,24 @@
     </div>
     <div class="main">
         <div class="products">
-            <p>Products go here.</p>
+          <div class="product" v-for="(item, index) in items">
+            <h4 class="product-title">{{ item.title }}</h4>
+            <button class="add-to-cart" v-on:click="addItem(index)">Add to Cart</button>
+          </div>
         </div>
         <div class="cart">
             <h2>Shopping Cart</h2>
-            <div>
-                No items in the cart.
+            <ul>
+              <li class="cart-item" v-for="(item, index) in cart">
+                <div class="item">{{ item.title }}</div>
+                <span class="item-qty">{{ item.qty }}</span>
+              </li>
+            </ul>
+            <div v-if="cart.length">
+                <div v-if="seen"> Total: ${{ total }}</div>
+            </div>
+            <div class="empty-cart" v-else>
+                No items in the cart
             </div>
         </div>
     </div>
@@ -34,6 +47,7 @@
 
 <!-- Scripts -->
 <script src="/reload/reload.js"></script>
+<script src="node_modules/vue/dist/vue.js" charset="utf-8"></script>
 <script type="text/javascript" src="public/script.js"></script>
 
 </body>
